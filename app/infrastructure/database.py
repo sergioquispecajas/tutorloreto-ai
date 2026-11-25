@@ -10,5 +10,9 @@ def get_engine():
         url = os.getenv("DATABASE_URL")
         if not url:
             raise RuntimeError("Falta DATABASE_URL en .env")
-        _engine = create_engine(url, pool_pre_ping=True)
+        # Algunos alojamientos entregan MySQL como mysql://...; el proyecto
+        # usa PyMySQL, así que especificamos el driver sin alterar la URL local.
+        if url.startswith("mysql://"):
+            url = "mysql+pymysql://" + url[len("mysql://"):]
+        _engine = create_engine(url, pool_pre_ping=True, pool_recycle=1800)
     return _engine

@@ -9,6 +9,7 @@ def generar_explicacion(
     repo: ConsultaRepository,
     generador: GeneradorExplicaciones,
     identificador: int,
+    grado: int | None = None,
 ) -> dict:
     consulta = repo.obtener(identificador)
     if consulta is None:
@@ -26,7 +27,13 @@ def generar_explicacion(
     if not materia:
         raise IARespuestaInvalida("La consulta no tiene una asignatura válida.")
 
-    contenido = generador.generar(pregunta=consulta["pregunta"], asignatura=materia)
+    parametros = {
+        "pregunta": consulta["pregunta"],
+        "asignatura": materia,
+    }
+    if grado is not None:
+        parametros["grado"] = grado
+    contenido = generador.generar(**parametros)
     if not isinstance(contenido, str) or not contenido.strip():
         raise IARespuestaInvalida("El modelo generó una respuesta vacía.")
     return repo.guardar_respuesta(identificador, contenido.strip(), origen="OLLAMA_LOCAL")

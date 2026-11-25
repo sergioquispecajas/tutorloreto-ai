@@ -4,6 +4,7 @@ from dataclasses import dataclass
 class Consulta:
     asignatura_id: int
     pregunta: str
+    perfil_id: str | None = None
 
     def validar(self):
         if self.asignatura_id < 1:

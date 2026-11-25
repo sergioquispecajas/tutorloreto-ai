@@ -4,10 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#6145CA">
-  <meta name="description" content="TutorLoreto AI: consultas escolares y explicaciones mediante inteligencia artificial local.">
-  <title>TutorLoreto AI · PMV1</title>
-  <link rel="stylesheet" href="/styles.css?v=nav5">
-  <script src="/app.js?v=m3e4" defer></script>
+  <meta name="description" content="TutorLoreto AI: consultas, práctica adaptativa y seguimiento escolar con inteligencia artificial local.">
+  <title>TutorLoreto AI · PMV1, PMV2 y PMV3</title>
+  <link rel="stylesheet" href="/styles.css?v=pmv23-5">
+  <script src="/biblioteca_catalogo.js?v=pmv23-5" defer></script>
+  <script src="/biblioteca_curricular.js?v=pmv23-5" defer></script>
+  <script src="/app.js?v=pmv23-5" defer></script>
 </head>
 
 <link rel="stylesheet" href="/katex/katex.min.css">
@@ -29,16 +31,93 @@
         <span class="eyebrow">APRENDIZAJE PARA LORETO</span>
         <h1 id="titulo-portada">Aprender comienza con una pregunta.</h1>
         <p>Tu tutor educativo para secundaria. Pregunta, comprende y aprende paso a paso desde la red de tu colegio.</p>
-        <button type="button" class="btn btn-primario btn-ancho" data-ir="inicio">Comenzar ahora <span aria-hidden="true">→</span></button>
+        <button type="button" class="btn btn-primario btn-ancho" data-ir="login">Iniciar sesión <span aria-hidden="true">→</span></button>
         <button type="button" class="btn btn-texto btn-ancho" data-ir="ayuda">¿Cómo funciona?</button>
-        <p class="aviso-suave"><span aria-hidden="true">✳</span> Sin cuenta · Servidor escolar · IA local</p>
+        <p class="aviso-suave"><span aria-hidden="true">✳</span> Cuenta del colegio · Servidor escolar · IA educativa</p>
+      </div>
+    </section>
+
+    <!-- Acceso escolar -->
+    <section class="vista" id="vista-login" data-vista="login" hidden aria-labelledby="titulo-login">
+      <header class="cabecera cabecera-simple"><button class="flecha-volver" type="button" data-ir="portada" aria-label="Volver">←</button><div><span class="eyebrow">CUENTA DEL COLEGIO</span><h1 id="titulo-login">Iniciar sesión</h1></div></header>
+      <div class="contenido-pantalla">
+        <div class="status-hero"><span aria-hidden="true">🏫</span><h2>Ingresa a tu espacio escolar</h2><p>Usa el correo y la contraseña que te entregó el colegio.</p></div>
+        <form id="form-login" class="formulario-pmv">
+          <label for="login-correo">Correo asignado</label>
+          <input id="login-correo" name="correo" type="email" maxlength="254" autocomplete="username" required>
+          <label for="login-contrasena">Contraseña</label>
+          <input id="login-contrasena" name="contrasena" type="password" maxlength="128" autocomplete="current-password" required>
+          <button id="login-enviar" type="submit" class="btn btn-primario btn-ancho">Entrar →</button>
+        </form>
+        <p id="login-mensaje" class="mensaje-formulario" role="status" aria-live="polite"></p>
+        <div class="nota-local"><span aria-hidden="true">🌿</span><span>El inicio de sesión funciona en la red local del colegio; no requiere internet externo.</span></div>
+        <p class="texto-ayuda texto-centro">¿No tienes cuenta? Solicita acceso al directivo o docente.</p>
+      </div>
+    </section>
+
+    <!-- Cambio de contraseña temporal o personal -->
+    <section class="vista" id="vista-cambiar_contrasena" data-vista="cambiar_contrasena" hidden aria-labelledby="titulo-cambiar-contrasena">
+      <header class="cabecera cabecera-simple"><div class="icono-area" aria-hidden="true">🔐</div><div><span class="eyebrow">SEGURIDAD DE TU CUENTA</span><h1 id="titulo-cambiar-contrasena">Cambiar contraseña</h1></div></header>
+      <div class="contenido-pantalla">
+        <p id="contrasena-indicacion" class="texto-ayuda">Crea una contraseña personal para continuar.</p>
+        <form id="form-cambiar-contrasena" class="formulario-pmv">
+          <label for="contrasena-actual">Contraseña actual o temporal</label>
+          <input id="contrasena-actual" type="password" autocomplete="current-password" minlength="1" maxlength="128" required>
+          <label for="contrasena-nueva">Nueva contraseña</label>
+          <input id="contrasena-nueva" type="password" autocomplete="new-password" minlength="10" maxlength="128" required>
+          <label for="contrasena-confirmar">Repite la nueva contraseña</label>
+          <input id="contrasena-confirmar" type="password" autocomplete="new-password" minlength="10" maxlength="128" required>
+          <p class="texto-ayuda">Usa entre 10 y 128 caracteres.</p>
+          <button type="submit" class="btn btn-primario btn-ancho">Guardar contraseña →</button>
+        </form>
+        <p id="contrasena-mensaje" class="mensaje-formulario" role="status" aria-live="polite"></p>
+        <button id="contrasena-cerrar-sesion" type="button" class="btn btn-texto btn-ancho">Cerrar sesión</button>
+      </div>
+    </section>
+
+    <!-- Gestión de cuentas para directivo y docente -->
+    <section class="vista" id="vista-cuentas" data-vista="cuentas" hidden aria-labelledby="titulo-cuentas">
+      <header class="cabecera cabecera-simple"><div class="icono-area" aria-hidden="true">👩‍🏫</div><div><span class="eyebrow">GESTIÓN ESCOLAR</span><h1 id="titulo-cuentas">Cuentas del colegio</h1></div></header>
+      <div class="contenido-pantalla">
+        <p class="texto-ayuda">Sesión: <strong id="cuentas-correo-actual"></strong> · <span id="cuentas-rol-actual"></span></p>
+        <div class="status-hero"><span aria-hidden="true">🎓</span><h2>Crear acceso para un alumno</h2><p>Entrega el correo y la contraseña temporal. Al ingresar, el alumno deberá cambiarla.</p></div>
+        <form id="form-cuenta-escolar" class="formulario-pmv">
+          <label for="cuenta-rol">Tipo de cuenta</label>
+          <select id="cuenta-rol" name="rol" required>
+            <option value="alumno">Alumno</option>
+            <option value="docente">Docente</option>
+          </select>
+          <label for="cuenta-correo">Correo del colegio</label>
+          <input id="cuenta-correo" name="correo" type="email" maxlength="254" autocomplete="off" required>
+          <div id="cuenta-campos-alumno">
+            <label for="cuenta-grado">Grado del alumno</label>
+            <select id="cuenta-grado" name="grado">
+              <option value="">Selecciona un grado</option>
+              <option value="1">1.° de secundaria</option><option value="2">2.° de secundaria</option>
+              <option value="3">3.° de secundaria</option><option value="4">4.° de secundaria</option>
+              <option value="5">5.° de secundaria</option>
+            </select>
+            <label for="cuenta-vigencia">Cuenta válida hasta</label>
+            <input id="cuenta-vigencia" name="vigente_hasta" type="date">
+          </div>
+          <label for="cuenta-contrasena">Contraseña temporal</label>
+          <input id="cuenta-contrasena" name="contrasena_temporal" type="password" minlength="10" maxlength="128" autocomplete="new-password" required>
+          <p class="texto-ayuda">La contraseña temporal debe tener al menos 10 caracteres.</p>
+          <button type="submit" class="btn btn-primario btn-ancho">Crear cuenta →</button>
+        </form>
+        <p id="cuenta-mensaje" class="mensaje-formulario" role="status" aria-live="polite"></p>
+        <div class="titulo-seccion"><h2>Cuentas existentes</h2><button id="actualizar-cuentas" class="enlace" type="button">Actualizar</button></div>
+        <div id="lista-cuentas" class="lista-cuentas" aria-live="polite"></div>
+        <p id="cuentas-vacio" class="estado-vacio" hidden>No hay cuentas creadas todavía.</p>
+        <button id="cuentas-cambiar-contrasena" type="button" class="btn btn-secundario btn-ancho">Cambiar mi contraseña</button>
+        <button id="cuentas-cerrar-sesion" type="button" class="btn btn-texto btn-ancho">Cerrar sesión</button>
       </div>
     </section>
 
     <!-- 02 / Inicio -->
     <section class="vista" id="vista-inicio" data-vista="inicio" hidden aria-labelledby="titulo-inicio">
       <header class="cabecera cabecera-morada">
-        <div class="cabecera-fila"><div><div class="cabecera-micro">TUTORLORETO AI <span class="punto-luz">●</span></div><h1 id="titulo-inicio">¡Hola, estudiante! 👋</h1><p>¿Qué te gustaría aprender hoy?</p></div><button class="icon-btn icon-btn-claro" type="button" data-ir="conexion" aria-label="Ver estado del tutor">◎</button></div>
+        <div class="cabecera-fila"><div><div class="cabecera-micro">TUTORLORETO AI <span class="punto-luz">●</span></div><h1 id="titulo-inicio">¡Hola, estudiante! 👋</h1><p id="inicio-correo"></p></div><div class="auth-botones"><button class="icon-btn icon-btn-claro" type="button" data-ir="conexion" aria-label="Ver estado del tutor">◎</button><button class="icon-btn icon-btn-claro" type="button" id="inicio-cambiar-contrasena" aria-label="Cambiar contraseña">🔐</button><button class="icon-btn icon-btn-claro" type="button" id="inicio-cerrar-sesion" aria-label="Cerrar sesión">↪</button></div></div>
         <button type="button" class="buscador-inicio" data-ir="asignaturas"><span aria-hidden="true">⌕</span><span>Buscar una asignatura...</span><span aria-hidden="true">→</span></button>
       </header>
       <div class="contenido-pantalla home-content">
@@ -51,9 +130,79 @@
           📊 Analizar mi desempeño
         </button>
      </div>
+        <div class="titulo-seccion"><h2>Personaliza tu aprendizaje</h2></div>
+        <div class="accesos-grid accesos-pmv23">
+          <button type="button" data-ir="perfil" class="acceso acceso-lila"><span class="acceso-emoji">🎒</span><strong>Mi grado</strong><small id="grado-resumen">Configura tu nivel</small></button>
+          <button type="button" data-ir="practica" class="acceso acceso-verde"><span class="acceso-emoji">✏️</span><strong>Practicar</strong><small>Ejercicios a tu nivel</small></button>
+          <button type="button" data-ir="historial" class="acceso acceso-azul"><span class="acceso-emoji">📈</span><strong>Mi progreso</strong><small>Historial y temas por reforzar</small></button>
+          <button type="button" data-ir="biblioteca" class="acceso acceso-rosa"><span class="acceso-emoji">📚</span><strong>Biblioteca</strong><small>Cursos, temas y teoría</small></button>
+        </div>
           <div class="titulo-seccion"><h2>Áreas disponibles</h2><button class="enlace" type="button" data-ir="asignaturas">Ver todas →</button></div>
         <div class="cursos-destacados" id="cursos-destacados"><p class="texto-ayuda">Cargando asignaturas desde MySQL…</p></div>
         <div class="nota-local">🌿 <span>Diseñada para funcionar dentro de la red escolar, sin depender de Internet externo.</span></div>
+      </div>
+    </section>
+
+    <!-- Biblioteca offline: curso > tema > teoría y recursos de video -->
+    <section class="vista" id="vista-biblioteca" data-vista="biblioteca" hidden aria-labelledby="titulo-biblioteca">
+      <header class="cabecera cabecera-simple"><button class="flecha-volver" type="button" data-ir="inicio" aria-label="Volver al inicio">←</button><div><span class="eyebrow">APRENDE A TU RITMO</span><h1 id="titulo-biblioteca">Biblioteca</h1></div></header>
+      <div class="contenido-pantalla">
+        <div id="biblioteca-cursos">
+          <section class="biblioteca-hero">
+            <div class="biblioteca-hero-sello" aria-hidden="true">✦</div>
+            <span class="biblioteca-hero-eyebrow">TU ESPACIO DE ESTUDIO</span>
+            <h2>Aprende a tu ritmo</h2>
+            <p>Elige un curso, explora temas por grado y practica con contenidos guardados en el servidor del colegio.</p>
+            <div class="biblioteca-hero-datos"><span><strong id="biblioteca-total-cursos">11</strong> cursos</span><span>📚 Teoría disponible sin Internet</span></div>
+          </section>
+          <h2 class="subtitulo biblioteca-titulo-seccion">Explora tus cursos</h2>
+          <label class="buscador-caja biblioteca-buscador" for="biblioteca-buscar-curso"><span aria-hidden="true">⌕</span><input id="biblioteca-buscar-curso" type="search" placeholder="Buscar un curso..." autocomplete="off"><span class="tecla-search" aria-hidden="true">↵</span></label>
+          <p id="biblioteca-cursos-resumen" class="biblioteca-conteo" aria-live="polite"></p>
+          <div id="biblioteca-lista-cursos" class="biblioteca-cursos-grid" aria-live="polite"></div>
+          <p id="biblioteca-sin-cursos" class="estado-vacio" hidden>No hay cursos cargados. Comprueba la conexión del servidor escolar.</p>
+          <p id="biblioteca-sin-resultados-cursos" class="estado-vacio" hidden>No encontramos ese curso. Prueba con otro nombre.</p>
+        </div>
+        <div id="biblioteca-temas" hidden>
+          <button class="enlace biblioteca-atras" type="button" id="biblioteca-volver-cursos">← Todos los cursos</button>
+          <div class="biblioteca-curso-resumen"><span class="biblioteca-curso-resumen-icono" aria-hidden="true">📘</span><div><small>CURSO SELECCIONADO</small><strong id="biblioteca-nombre-curso"></strong><span id="biblioteca-competencia-curso"></span></div></div>
+          <h2 class="subtitulo margen-arriba">Encuentra tu tema</h2>
+          <p id="biblioteca-resumen-temas" class="texto-ayuda"></p>
+          <div class="biblioteca-filtros">
+            <label class="buscador-caja biblioteca-buscador" for="biblioteca-buscar-tema"><span aria-hidden="true">⌕</span><input id="biblioteca-buscar-tema" type="search" placeholder="Buscar tema o módulo..." autocomplete="off"></label>
+            <label class="biblioteca-filtro-grado" for="biblioteca-filtro-grado">Grado<select id="biblioteca-filtro-grado"><option value="mi-grado">Mi grado</option><option value="todos">Todos los grados</option><option value="1">1.° secundaria</option><option value="2">2.° secundaria</option><option value="3">3.° secundaria</option><option value="4">4.° secundaria</option><option value="5">5.° secundaria</option></select></label>
+          </div>
+          <p id="biblioteca-conteo-temas" class="biblioteca-conteo" aria-live="polite"></p>
+          <div id="biblioteca-lista-temas" class="biblioteca-lista-modulos" aria-live="polite"></div>
+          <p id="biblioteca-sin-resultados-temas" class="estado-vacio" hidden>No hay temas con ese filtro. Cambia el grado o busca otra palabra.</p>
+          <div id="biblioteca-temas-pendientes" class="mensaje-lineal" hidden><strong>Módulos por completar</strong><p>Aún no hay teoría precargada para este curso. Puedes escribir un tema en Practicar para generar un ejercicio con la IA educativa.</p><button type="button" id="biblioteca-practica-libre" class="btn btn-secundario">Practicar un tema de este curso</button></div>
+        </div>
+        <article id="biblioteca-detalle-tema" class="biblioteca-detalle" hidden>
+          <button class="enlace biblioteca-atras" type="button" id="biblioteca-volver-temas">← Volver a temas</button>
+          <span class="chip chip-morado" id="biblioteca-etiqueta-curso"></span>
+          <h2 id="biblioteca-titulo-tema" class="biblioteca-titulo-tema"></h2>
+          <p id="biblioteca-competencia-tema" class="biblioteca-competencia-tema"></p>
+          <div id="biblioteca-teoria" class="biblioteca-teoria"></div>
+          <section class="biblioteca-practica" aria-labelledby="biblioteca-titulo-practica">
+            <h3 id="biblioteca-titulo-practica">Práctica precargada</h3>
+            <p id="biblioteca-enunciado-practica" class="texto-ayuda"></p>
+            <form id="form-biblioteca-respuesta">
+              <fieldset id="biblioteca-opciones-practica" class="opciones-practica"><legend>Elige una alternativa</legend></fieldset>
+              <button type="submit" id="biblioteca-enviar-respuesta" class="btn btn-primario btn-ancho">Revisar mi respuesta →</button>
+            </form>
+            <div id="biblioteca-resultado-practica" class="resultado-practica" hidden aria-live="polite">
+              <h4 id="biblioteca-resultado-titulo"></h4>
+              <p><strong>Respuesta correcta:</strong> <span id="biblioteca-respuesta-correcta"></span></p>
+              <p id="biblioteca-explicacion-practica"></p>
+            </div>
+            <div id="biblioteca-mensaje-practica" class="mensaje-formulario" role="status" aria-live="polite"></div>
+          </section>
+          <section class="biblioteca-videos" aria-labelledby="biblioteca-titulo-videos">
+            <div class="biblioteca-video-icono" aria-hidden="true">▶</div>
+            <div><h3 id="biblioteca-titulo-videos">Videos explicativos</h3><p>Busca opciones en YouTube y elige el video que quieras ver. Necesitas internet para reproducirlos.</p><a id="biblioteca-enlace-video" class="btn btn-secundario" target="_blank" rel="noopener noreferrer">Ver videos del tema en YouTube ↗</a></div>
+          </section>
+          <div class="nota-local"><span aria-hidden="true">🌿</span><span>La teoría de este módulo está guardada en la página y se puede leer sin internet externo mientras tengas acceso al servidor del colegio.</span></div>
+          <button type="button" id="biblioteca-practicar-tema" class="btn btn-secundario btn-ancho">Crear otro ejercicio con IA →</button>
+        </article>
       </div>
     </section>
 
@@ -101,7 +250,7 @@
     <!-- 07 / Explicación IA -->
     <section class="vista" id="vista-explicacion" data-vista="explicacion" hidden aria-labelledby="titulo-explicacion">
       <header class="cabecera cabecera-simple"><button type="button" class="flecha-volver" data-ir="inicio" aria-label="Volver al inicio">←</button><div><span class="eyebrow">RESPUESTA DEL TUTOR</span><h1 id="titulo-explicacion">Explicación paso a paso</h1></div></header>
-      <div class="contenido-pantalla"><div class="tarjeta-seleccion"><div class="icono-area" aria-hidden="true">🧠</div><div><small>ASIGNATURA</small><strong id="curso-explicacion">—</strong></div><span class="chip chip-exito">IA local</span></div><div class="pregunta-citada"><small>TU PREGUNTA</small><p id="pregunta-explicacion">—</p></div><div class="titulo-seccion"><h2>Vamos paso a paso</h2><span class="chip chip-morado">Explicación</span></div><div id="explicacion-pasos" class="bloque-pasos" aria-live="polite"></div><div class="nota-local"><span aria-hidden="true">✦</span><span>Verifica con tus materiales de clase cualquier información que te genere dudas.</span></div><button class="btn btn-primario btn-ancho" type="button" id="otra-consulta">Hacer otra pregunta →</button><button class="btn btn-secundario btn-ancho" type="button" data-ir="asignaturas">Cambiar de asignatura</button></div>
+      <div class="contenido-pantalla"><div class="tarjeta-seleccion"><div class="icono-area" aria-hidden="true">🧠</div><div><small>ASIGNATURA</small><strong id="curso-explicacion">—</strong></div><span class="chip chip-exito">IA educativa</span></div><div class="pregunta-citada"><small>TU PREGUNTA</small><p id="pregunta-explicacion">—</p></div><div class="titulo-seccion"><h2>Vamos paso a paso</h2><span class="chip chip-morado">Explicación</span></div><div id="explicacion-pasos" class="bloque-pasos" aria-live="polite"></div><div class="nota-local"><span aria-hidden="true">✦</span><span>Verifica con tus materiales de clase cualquier información que te genere dudas.</span></div><button class="btn btn-primario btn-ancho" type="button" id="otra-consulta">Hacer otra pregunta →</button><button class="btn btn-secundario btn-ancho" type="button" data-ir="asignaturas">Cambiar de asignatura</button></div>
     </section>
 
     <!-- 08 / Validación -->
@@ -112,13 +261,13 @@
     <!-- 09 / Tutorial -->
     <section class="vista" id="vista-ayuda" data-vista="ayuda" hidden aria-labelledby="titulo-ayuda">
       <header class="cabecera cabecera-morada cabecera-ayuda"><button type="button" class="flecha-volver flecha-clara" data-ir="inicio" aria-label="Volver al inicio">←</button><span class="eyebrow eyebrow-claro">GUÍA RÁPIDA</span><h1 id="titulo-ayuda">Aprender es más fácil con una buena pregunta.</h1><p>Tu tutor te acompaña durante el estudio.</p></header>
-      <div class="contenido-pantalla"><div class="titulo-seccion"><h2>¿Cómo se utiliza?</h2></div><div class="paso-ayuda"><span class="burbuja ayuda-uno">1</span><div><h3>Busca una asignatura</h3><p>Selecciona el área curricular que estás estudiando.</p></div></div><div class="paso-ayuda"><span class="burbuja ayuda-dos">2</span><div><h3>Escribe tu consulta</h3><p>Pregunta con tus propias palabras. Puedes pedir ejemplos.</p></div></div><div class="paso-ayuda"><span class="burbuja ayuda-tres">3</span><div><h3>Lee la explicación</h3><p>La IA local intenta explicar el tema con pasos sencillos.</p></div></div><div class="nota-local"><span>📡</span><span>Para usar TutorLoreto AI, necesitas conectarte al servidor del colegio mediante su red local. El servidor puede funcionar sin Internet externo.</span></div><button class="btn btn-primario btn-ancho" type="button" data-ir="asignaturas">Elegir mi asignatura →</button></div>
+      <div class="contenido-pantalla"><div class="titulo-seccion"><h2>¿Cómo se utiliza?</h2></div><div class="paso-ayuda"><span class="burbuja ayuda-uno">1</span><div><h3>Busca una asignatura</h3><p>Selecciona el área curricular que estás estudiando.</p></div></div><div class="paso-ayuda"><span class="burbuja ayuda-dos">2</span><div><h3>Escribe tu consulta</h3><p>Pregunta con tus propias palabras. Puedes pedir ejemplos.</p></div></div><div class="paso-ayuda"><span class="burbuja ayuda-tres">3</span><div><h3>Lee la explicación</h3><p>La IA configurada intenta explicar el tema con pasos sencillos.</p></div></div><div class="nota-local"><span>📡</span><span>Esta publicación de Railway necesita Internet para conectarse a Ollama Cloud. Para trabajar sin Internet externo, configura Ollama local en el servidor del colegio.</span></div><button class="btn btn-primario btn-ancho" type="button" data-ir="asignaturas">Elegir mi asignatura →</button></div>
     </section>
 
     <!-- 10 / Estado de conexión -->
     <section class="vista" id="vista-conexion" data-vista="conexion" hidden aria-labelledby="titulo-conexion">
       <header class="cabecera cabecera-simple"><button type="button" class="flecha-volver" data-ir="inicio" aria-label="Volver al inicio">←</button><div><span class="eyebrow">SERVIDOR ESCOLAR</span><h1 id="titulo-conexion">Estado de conexión</h1></div></header>
-      <div class="contenido-pantalla"><div class="status-hero"><span aria-hidden="true">📡</span><h2>Tu tutor en la red local</h2><p>Comprueba si el servidor y la IA local responden.</p></div><div class="lista-estados"><div class="estado-fila"><div><strong>Servidor TutorLoreto</strong><small>Respuesta desde esta página</small></div><span id="estado-servidor" class="chip chip-neutro">Sin comprobar</span></div><div class="estado-fila"><div><strong>Modelo de IA</strong><small>Ollama instalado en el servidor</small></div><span id="estado-modelo" class="chip chip-neutro">Sin comprobar</span></div><div class="estado-fila"><div><strong>Internet externo</strong><small>La prueba offline se hace en el colegio</small></div><span class="chip chip-neutro">No comprobado</span></div></div><p id="detalle-conexion" class="texto-ayuda" role="status">Pulsa Comprobar para consultar los servicios.</p><button class="btn btn-primario btn-ancho" type="button" id="comprobar-conexion">Comprobar servicios →</button><button class="btn btn-secundario btn-ancho" type="button" data-ir="ayuda">Cómo usar la red escolar</button><div class="nota-local"><span>ℹ</span><span>Una respuesta del servidor no demuestra por sí sola HU07 ni HU08. Esas pruebas deben ejecutarse con Internet externo desconectado y otro equipo de la misma LAN.</span></div></div>
+      <div class="contenido-pantalla"><div class="status-hero"><span aria-hidden="true">📡</span><h2>Conexión de TutorLoreto</h2><p>Comprueba si el servidor y el modelo de IA configurado responden.</p></div><div class="lista-estados"><div class="estado-fila"><div><strong>Servidor TutorLoreto</strong><small>Respuesta desde esta página</small></div><span id="estado-servidor" class="chip chip-neutro">Sin comprobar</span></div><div class="estado-fila"><div><strong>Modelo de IA</strong><small>Ollama local o Cloud, según la configuración</small></div><span id="estado-modelo" class="chip chip-neutro">Sin comprobar</span></div><div class="estado-fila"><div><strong>Internet externo</strong><small>La prueba offline se hace en el colegio</small></div><span class="chip chip-neutro">No comprobado</span></div></div><p id="detalle-conexion" class="texto-ayuda" role="status">Pulsa Comprobar para consultar los servicios.</p><button class="btn btn-primario btn-ancho" type="button" id="comprobar-conexion">Comprobar servicios →</button><button class="btn btn-secundario btn-ancho" type="button" data-ir="ayuda">Cómo usar la red escolar</button><div class="nota-local"><span>ℹ</span><span>Una respuesta del servidor no demuestra por sí sola HU07 ni HU08. Esas pruebas deben ejecutarse con Internet externo desconectado y otro equipo de la misma LAN.</span></div></div>
     </section>
 
     <!-- 11 / Error de IA -->
@@ -204,10 +353,102 @@
       </div>
     </section>
 
+    <!-- 16 / Perfil académico PMV2 -->
+    <section class="vista" id="vista-perfil" data-vista="perfil" hidden aria-labelledby="titulo-perfil">
+      <header class="cabecera cabecera-simple"><button type="button" class="flecha-volver" data-ir="inicio" aria-label="Volver a inicio">←</button><div><span class="eyebrow">TU NIVEL DE APRENDIZAJE</span><h1 id="titulo-perfil">Mi grado</h1></div></header>
+      <div class="contenido-pantalla">
+        <div class="status-hero"><span aria-hidden="true">🎒</span><h2>Explicaciones a tu nivel</h2><p>Usamos tu grado para ajustar el vocabulario y los ejercicios.</p></div>
+        <div id="perfil-asignado-colegio" class="mensaje-lineal" hidden><strong>Grado asignado por el colegio</strong><p id="perfil-grado-asignado"></p><p>Si tu grado cambió, solicita la actualización al directivo o docente.</p></div>
+        <form id="form-perfil" class="formulario-pmv">
+          <label for="perfil-grado">Grado de secundaria</label>
+          <select id="perfil-grado" name="grado" required>
+            <option value="">Selecciona tu grado</option>
+            <option value="1">1.° de secundaria</option>
+            <option value="2">2.° de secundaria</option>
+            <option value="3">3.° de secundaria</option>
+            <option value="4">4.° de secundaria</option>
+            <option value="5">5.° de secundaria</option>
+          </select>
+          <p class="texto-ayuda">Tu cuenta del colegio guarda el grado y el progreso en el servidor escolar.</p>
+          <button type="submit" class="btn btn-primario btn-ancho">Guardar mi grado →</button>
+        </form>
+        <p id="perfil-mensaje" class="mensaje-formulario" role="status" aria-live="polite"></p>
+        <button type="button" class="btn btn-secundario btn-ancho" data-ir="practica">Ir a practicar →</button>
+      </div>
+    </section>
+
+    <!-- 17 / Práctica adaptativa PMV2 -->
+    <section class="vista" id="vista-practica" data-vista="practica" hidden aria-labelledby="titulo-practica">
+      <header class="cabecera cabecera-simple"><button type="button" class="flecha-volver" data-ir="inicio" aria-label="Volver a inicio">←</button><div><span class="eyebrow">PRACTICA A TU RITMO</span><h1 id="titulo-practica">Un ejercicio para ti</h1></div></header>
+      <div class="contenido-pantalla">
+        <div id="practica-perfil-requerido" class="mensaje-lineal" hidden><strong>Primero registra tu grado.</strong><p>Así la IA puede ajustar el ejercicio a tu nivel.</p><button type="button" class="btn btn-secundario" data-ir="perfil">Configurar mi grado</button></div>
+        <p class="texto-ayuda">Nivel actual: <strong id="practica-grado">Sin registrar</strong></p>
+        <form id="form-practica" class="formulario-pmv">
+          <label for="practica-asignatura">Asignatura</label>
+          <select id="practica-asignatura" name="asignatura_id" required>
+            <option value="">Selecciona un área</option>
+          </select>
+          <label for="practica-tema">Tema que quieres practicar</label>
+          <input id="practica-tema" name="tema" type="text" maxlength="180" required placeholder="Ej.: fracciones, ecosistemas, lectura">
+          <label for="practica-dificultad">Dificultad</label>
+          <select id="practica-dificultad" name="dificultad" required>
+            <option value="adaptativa" selected>Según mi progreso · recomendado</option>
+            <option value="basico">Básico · conceptos y pasos directos</option>
+            <option value="intermedio">Intermedio · aplica lo aprendido</option>
+            <option value="reto">Reto · razona y resuelve una situación nueva</option>
+          </select>
+          <button id="generar-practica" type="submit" class="btn btn-primario btn-ancho">Crear ejercicio con IA →</button>
+        </form>
+        <p id="practica-mensaje" class="mensaje-formulario" role="status" aria-live="polite"></p>
+        <article id="ejercicio-generado" class="tarjeta-ejercicio" hidden>
+          <span class="chip chip-morado" id="ejercicio-etiqueta">Ejercicio</span>
+          <h2 id="ejercicio-enunciado"></h2>
+          <form id="form-respuesta-practica">
+            <fieldset id="opciones-practica" class="opciones-practica">
+              <legend>Elige una alternativa</legend>
+            </fieldset>
+            <button id="enviar-respuesta-practica" type="submit" class="btn btn-primario btn-ancho" disabled>Revisar mi respuesta →</button>
+          </form>
+          <div id="resultado-practica" class="resultado-practica" hidden aria-live="polite">
+            <h3 id="resultado-practica-titulo"></h3>
+            <p><strong>Respuesta correcta:</strong> <span id="respuesta-practica-correcta"></span></p>
+            <p id="explicacion-practica"></p>
+          </div>
+          <button id="otra-practica" type="button" class="btn btn-secundario btn-ancho" hidden>Practicar otro tema</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- 18 / Historial y seguimiento PMV3 -->
+    <section class="vista" id="vista-historial" data-vista="historial" hidden aria-labelledby="titulo-historial">
+      <header class="cabecera cabecera-simple"><button type="button" class="flecha-volver" data-ir="inicio" aria-label="Volver a inicio">←</button><div><span class="eyebrow">TU RECORRIDO</span><h1 id="titulo-historial">Mi progreso</h1></div></header>
+      <div class="contenido-pantalla">
+        <div class="resumen-progreso" aria-label="Resumen de actividad">
+          <article><strong id="resumen-practicas">0</strong><span>prácticas</span></article>
+          <article><strong id="resumen-aciertos">0%</strong><span>aciertos</span></article>
+          <article><strong id="resumen-consultas">0</strong><span>consultas</span></article>
+        </div>
+        <div class="titulo-seccion"><h2>Avance por tema</h2><button id="actualizar-progreso" class="enlace" type="button">Actualizar</button></div>
+        <p class="texto-ayuda">Los temas con menos aciertos aparecen primero para ayudarte a decidir qué reforzar.</p>
+        <div id="lista-progreso" class="lista-progreso" aria-live="polite"></div>
+        <p id="progreso-vacio" class="estado-vacio" hidden>Aún no hay prácticas respondidas. Elige un tema y resuelve tu primer ejercicio.</p>
+        <button type="button" class="btn btn-secundario btn-ancho" data-ir="practica">Practicar un tema →</button>
+        <div class="titulo-seccion titulo-historial"><h2>Orientación de TutorLoreto AI</h2></div>
+        <p class="texto-ayuda">La IA revisa tus actividades guardadas y sugiere qué reforzar.</p>
+        <button id="analizar-historial" type="button" class="btn btn-primario btn-ancho">Analizar mi historial con IA →</button>
+        <p id="analisis-mensaje" class="mensaje-formulario" role="status" aria-live="polite"></p>
+        <article id="resultado-analisis" class="tarjeta-analisis" hidden><h3>Una guía para continuar</h3><p id="orientacion-ia"></p></article>
+        <div class="titulo-seccion titulo-historial"><h2>Actividad reciente</h2></div>
+        <div id="lista-historial" class="lista-historial" aria-live="polite"></div>
+        <p id="historial-vacio" class="estado-vacio" hidden>Tus consultas y prácticas aparecerán aquí.</p>
+      </div>
+    </section>
+
   </main>
   <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal" hidden>
     <button type="button" data-ir="inicio" data-nav="inicio"><span aria-hidden="true">⌂</span><small>Inicio</small></button>
     <button type="button" data-ir="asignaturas" data-nav="asignaturas"><span aria-hidden="true">▦</span><small>Áreas</small></button>
+    <button type="button" data-ir="biblioteca" data-nav="biblioteca"><span aria-hidden="true">📚</span><small>Biblioteca</small></button>
     <button type="button" data-ir="consulta" data-nav="consulta"><span aria-hidden="true">✎</span><small>Consulta</small></button>
     <button type="button" data-ir="ayuda" data-nav="ayuda"><span aria-hidden="true">ⓘ</span><small>Ayuda</small></button>
   </nav>

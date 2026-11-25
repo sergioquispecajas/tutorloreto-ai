@@ -4,23 +4,27 @@ from main import app
 
 
 VISTAS = [
-    'portada', 'inicio', 'asignaturas', 'consulta', 'registro', 'procesando',
+    'portada', 'login', 'cambiar_contrasena', 'cuentas', 'inicio', 'asignaturas', 'biblioteca', 'consulta', 'registro', 'procesando',
     'explicacion', 'validacion', 'ayuda', 'conexion', 'error_ia', 'sin_lan',
-    'sin_resultados', 'limite',
+    'sin_resultados', 'limite', 'desempeno', 'perfil', 'practica', 'historial',
 ]
 
 
-def test_las_14_vistas_estan_incluidas():
+def test_vistas_del_proyecto_estan_incluidas():
     r = TestClient(app).get('/')
     assert r.status_code == 200
     for vista in VISTAS:
         assert f'id="vista-{vista}"' in r.text
-    assert '<script src="/app.js?v=m3e4" defer></script>' in r.text
+    assert '<script src="/biblioteca_catalogo.js?v=pmv23-5" defer></script>' in r.text
+    assert '<script src="/biblioteca_curricular.js?v=pmv23-5" defer></script>' in r.text
+    assert '<script src="/app.js?v=pmv23-5" defer></script>' in r.text
 
 
 def test_archivos_locales_se_entregan():
     cliente = TestClient(app)
-    for ruta in ['/styles.css?v=m3e4', '/app.js?v=m3e4', '/assets/aprender.svg']:
+    for ruta in ['/styles.css?v=pmv23-5', '/app.js?v=pmv23-5',
+                 '/biblioteca_catalogo.js?v=pmv23-5',
+                 '/biblioteca_curricular.js?v=pmv23-5', '/assets/aprender.svg']:
         respuesta = cliente.get(ruta)
         assert respuesta.status_code == 200, ruta
         assert respuesta.content, ruta

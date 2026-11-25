@@ -21,6 +21,64 @@
 /* El foco de navegación programática en títulos no debe dibujar un recuadro visual. */
 h1[tabindex="-1"]:focus{outline:none}
 
+/* Biblioteca curricular: navegación por curso, grado y módulo */
+.biblioteca-hero{position:relative;overflow:hidden;margin:1px 0 22px;padding:22px;border-radius:24px;color:#fff;background:linear-gradient(135deg,#4935a4 0%,#7055ce 57%,#9277e9 100%);box-shadow:0 14px 30px #5845ad2c}
+.biblioteca-hero:after{content:"";position:absolute;right:-37px;bottom:-72px;width:190px;height:190px;border:1px solid #ffffff2c;border-radius:50%;box-shadow:0 0 0 22px #ffffff0b,0 0 0 46px #ffffff0b}
+.biblioteca-hero-sello{display:grid;place-items:center;width:39px;height:39px;margin-bottom:14px;border:1px solid #ffffff48;border-radius:14px;background:#ffffff1c;font-size:1.15rem}
+.biblioteca-hero-eyebrow{font-size:.63rem;letter-spacing:.13em;font-weight:850;color:#e9e2ff}
+.biblioteca-hero h2{position:relative;z-index:1;margin:5px 0 7px;color:#fff;font-size:1.45rem;letter-spacing:-.035em}
+.biblioteca-hero>p{position:relative;z-index:1;max-width:310px;margin:0;color:#f2efff;font-size:.77rem;line-height:1.55}
+.biblioteca-hero-datos{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+.biblioteca-hero-datos span{display:inline-flex;align-items:center;gap:5px;padding:7px 10px;border:1px solid #ffffff30;border-radius:999px;background:#ffffff16;color:#fff;font-size:.67rem}
+.biblioteca-hero-datos strong{font-size:.8rem}
+.biblioteca-titulo-seccion{margin-bottom:12px}
+.biblioteca-buscador{margin:10px 0 7px}
+.biblioteca-conteo{margin:8px 2px 12px;color:#827b99;font-size:.69rem;font-weight:750}
+.biblioteca-cursos-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.biblioteca-curso-card{display:flex;min-width:0;min-height:164px;flex-direction:column;align-items:stretch;gap:7px;padding:14px;border:1px solid #e9e4f3;border-radius:20px;background:linear-gradient(150deg,#fff 0%,#f8f6ff 100%);text-align:left;box-shadow:0 5px 14px #2b20520a;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.biblioteca-curso-card:nth-child(4n+2){background:linear-gradient(150deg,#fff 0%,#f0fbf6 100%);border-color:#e0f0e8}
+.biblioteca-curso-card:nth-child(4n+3){background:linear-gradient(150deg,#fff 0%,#f1f8ff 100%);border-color:#e2edf8}
+.biblioteca-curso-card:nth-child(4n){background:linear-gradient(150deg,#fff 0%,#fff7ed 100%);border-color:#f4eadb}
+.biblioteca-curso-card:hover{transform:translateY(-2px);box-shadow:0 10px 20px #2b205214;border-color:#c9bdf4}
+.biblioteca-curso-card:focus-visible,.biblioteca-leccion:focus-visible{outline:3px solid #b9a8f8;outline-offset:2px}
+.biblioteca-curso-card-cabecera{display:flex;align-items:center;justify-content:space-between}
+.biblioteca-curso-icono{display:grid;place-items:center;width:39px;height:39px;border-radius:14px;background:#ece7ff;font-size:1.25rem}
+.biblioteca-curso-card:nth-child(4n+2) .biblioteca-curso-icono{background:#ddf6e9}
+.biblioteca-curso-card:nth-child(4n+3) .biblioteca-curso-icono{background:#e0f0ff}
+.biblioteca-curso-card:nth-child(4n) .biblioteca-curso-icono{background:#fff0da}
+.biblioteca-curso-flecha{color:#7761c5;font-size:1rem;font-weight:850}
+.biblioteca-curso-nombre{min-height:2.2em;color:#282341;font-size:.83rem;line-height:1.25;overflow-wrap:anywhere}
+.biblioteca-curso-descripcion{display:-webkit-box;overflow:hidden;min-height:2.6em;color:#777189;font-size:.63rem;line-height:1.4;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.biblioteca-curso-pie{display:flex;align-items:center;justify-content:space-between;gap:5px;margin-top:auto;padding-top:8px;border-top:1px solid #29233e12;color:#6858a5;font-size:.62rem;font-weight:800}
+.biblioteca-curso-resumen{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid #e8e3f3;border-radius:19px;background:linear-gradient(120deg,#f4f0ff,#f0f8ff)}
+.biblioteca-curso-resumen-icono{display:grid;place-items:center;flex:0 0 44px;height:44px;border-radius:15px;background:#fff;font-size:1.35rem;box-shadow:0 4px 12px #33235e10}
+.biblioteca-curso-resumen>div{display:grid;min-width:0;gap:3px}
+.biblioteca-curso-resumen small{color:#82749f;font-size:.59rem;font-weight:850;letter-spacing:.1em}
+.biblioteca-curso-resumen strong{color:#2e2847;font-size:.88rem;line-height:1.25}
+.biblioteca-curso-resumen span:last-child{color:#777189;font-size:.64rem;line-height:1.4}
+.biblioteca-filtros{display:grid;grid-template-columns:minmax(0,1fr) 124px;align-items:end;gap:9px;margin-top:13px}
+.biblioteca-filtros .biblioteca-buscador{margin:0}
+.biblioteca-filtro-grado{display:grid;gap:5px;color:#68617c;font-size:.63rem;font-weight:800}
+.biblioteca-filtro-grado select{width:100%;min-height:46px;padding:0 9px;border:1px solid #ded8eb;border-radius:14px;background:#fff;color:#403a58;font:inherit;font-size:.68rem}
+.biblioteca-lista-modulos{display:grid;gap:15px}
+.biblioteca-modulo{overflow:hidden;border:1px solid #eae6f2;border-radius:19px;background:#fff;box-shadow:0 5px 16px #2b205209}
+.biblioteca-modulo-cabecera{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:12px 13px;background:linear-gradient(100deg,#f4f0ff,#f4f9ff);border-bottom:1px solid #eeeaf5}
+.biblioteca-modulo-cabecera h3{margin:0;color:#393250;font-size:.76rem;line-height:1.3}
+.biblioteca-grado-etiqueta{flex:0 0 auto;padding:5px 8px;border-radius:999px;background:#fff;color:#6652b2;font-size:.58rem;font-weight:850}
+.biblioteca-modulo-lecciones{display:grid;padding:4px 12px}
+.biblioteca-leccion{display:flex;align-items:center;gap:11px;width:100%;min-width:0;padding:12px 2px;border:0;border-bottom:1px solid #f0edf5;background:transparent;text-align:left}
+.biblioteca-leccion:last-child{border-bottom:0}
+.biblioteca-leccion-numero{display:grid;place-items:center;flex:0 0 33px;height:33px;border-radius:11px;background:#f1edff;color:#725ec4;font-size:.68rem;font-weight:900}
+.biblioteca-leccion-contenido{display:grid;flex:1;min-width:0;gap:4px}
+.biblioteca-leccion-contenido strong{color:#332e49;font-size:.74rem;line-height:1.35;overflow-wrap:anywhere}
+.biblioteca-leccion-contenido small{color:#89839a;font-size:.59rem;line-height:1.35}
+.biblioteca-leccion-flecha{color:#7762c1;font-size:1.2rem;font-weight:750}
+.biblioteca-competencia-tema{margin:-8px 0 15px;color:#777189;font-size:.73rem;line-height:1.5}
+.biblioteca-practica{margin-top:20px;padding:16px;border:1px solid #e9e4f4;border-radius:20px;background:linear-gradient(145deg,#faf8ff,#fff)}
+.biblioteca-practica h3{margin:0 0 8px;color:#443677;font-size:.95rem}
+.biblioteca-detalle .biblioteca-bloque-teoria{box-shadow:0 4px 14px #2b205208}
+@media(max-width:380px){.biblioteca-cursos-grid{grid-template-columns:1fr}.biblioteca-curso-card{min-height:145px}.biblioteca-filtros{grid-template-columns:1fr}.biblioteca-filtro-grado select{min-height:44px}}
+
 /* TutorLoreto AI: explicación estilo lectura educativa */
 
 .bloque-pasos {
@@ -193,3 +251,74 @@ body {
 #form-desempeno button {
   margin-top: 16px;
 }
+
+/* PMV2 y PMV3: perfil, práctica y seguimiento */
+.accesos-pmv23 .acceso { min-height: 132px; }
+.formulario-pmv { display:flex; flex-direction:column; gap:10px; margin:18px 0; }
+.formulario-pmv label { display:block; margin-top:7px; color:#403b58; font-size:.88rem; font-weight:750; }
+.formulario-pmv input,
+.formulario-pmv select { width:100%; min-height:48px; padding:12px 14px; border:1px solid #d9d5e8; border-radius:13px; background:#fff; color:#28243b; font:inherit; font-size:1rem; }
+.formulario-pmv input:focus,
+.formulario-pmv select:focus,
+.opcion-practica:focus-within { outline:3px solid #b9a8f7; outline-offset:2px; }
+.mensaje-formulario { min-height:1.4em; color:#625d78; font-size:.84rem; line-height:1.5; }
+.tarjeta-ejercicio { margin-top:22px; padding:18px; border:1px solid var(--borde); border-radius:20px; background:#fff; box-shadow:0 8px 28px #392d6b0c; }
+.tarjeta-ejercicio h2 { margin:15px 0; color:#28243b; font-size:1.16rem; line-height:1.55; overflow-wrap:anywhere; }
+.opciones-practica { min-width:0; margin:14px 0; padding:0; border:0; }
+.opciones-practica legend { margin-bottom:10px; color:#625d78; font-size:.82rem; font-weight:750; }
+.opcion-practica { display:flex; align-items:flex-start; gap:11px; margin:9px 0; padding:13px; border:1px solid #e6e2f0; border-radius:14px; background:#fbfaff; color:#39354e; font-size:.87rem; line-height:1.5; cursor:pointer; }
+.opcion-practica input { width:19px; height:19px; flex:0 0 19px; margin:1px 0 0; accent-color:var(--morado); }
+.opcion-practica span { min-width:0; overflow-wrap:anywhere; }
+.resultado-practica { margin-top:17px; padding:15px; border-radius:15px; font-size:.86rem; line-height:1.6; }
+.resultado-practica h3 { margin:0 0 9px; font-size:1rem; }
+.resultado-practica p { margin:7px 0; overflow-wrap:anywhere; }
+.respuesta-correcta { background:#e8f8ef; color:#26684d; }
+.respuesta-incorrecta { background:#fff3e6; color:#75552f; }
+.resumen-progreso { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; margin:3px 0 23px; }
+.resumen-progreso article { display:flex; min-width:0; flex-direction:column; align-items:center; gap:4px; padding:14px 6px; border:1px solid var(--borde); border-radius:15px; background:#fff; text-align:center; }
+.resumen-progreso strong { color:var(--morado); font-size:1.24rem; }
+.resumen-progreso span { color:#77728a; font-size:.7rem; }
+.lista-progreso,.lista-historial { display:grid; gap:11px; margin:12px 0 18px; }
+.tema-progreso,.actividad-historial,.tarjeta-analisis { padding:15px; border:1px solid var(--borde); border-radius:16px; background:#fff; }
+.tema-progreso h3 { margin:0; color:#39354e; font-size:.9rem; line-height:1.45; overflow-wrap:anywhere; }
+.tema-progreso p { margin:7px 0 11px; color:#77728a; font-size:.75rem; }
+.barra-progreso { height:9px; overflow:hidden; border-radius:20px; background:#eeeaf7; }
+.barra-progreso span { display:block; height:100%; border-radius:inherit; background:linear-gradient(90deg,#7c62dd,#54bd95); transition:width .25s ease; }
+.tema-progreso .enlace { margin-top:10px; padding:5px 0; }
+.estado-vacio { padding:15px; border:1px dashed #d7d1e5; border-radius:15px; color:#77728a; font-size:.82rem; line-height:1.5; }
+.titulo-historial { margin-top:26px; }
+.actividad-cabecera { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.actividad-cabecera strong { color:#423b60; font-size:.8rem; }
+.actividad-cabecera time { color:#89849a; font-size:.66rem; text-align:right; }
+.actividad-materia { margin:9px 0 4px; color:#6f5bc1; font-size:.75rem; font-weight:750; }
+.actividad-detalle { margin:4px 0 11px; color:#48445b; font-size:.81rem; line-height:1.5; overflow-wrap:anywhere; }
+.chip-alerta { background:#fff0dc; color:#94632a; }
+.tarjeta-analisis h3 { margin:0 0 10px; color:#514087; font-size:.92rem; }
+.tarjeta-analisis p { margin:0; color:#39354e; font-size:.86rem; line-height:1.7; white-space:pre-wrap; overflow-wrap:anywhere; }
+.titulo-seccion { min-width:0; }
+.nav-inferior { grid-template-columns:repeat(5,minmax(0,1fr)); }
+.nav-inferior button small { font-size:.61rem; }
+.biblioteca-atras { display:inline-flex; margin:0 0 16px; padding:7px 0; }
+.biblioteca-curso,.biblioteca-tema { text-align:left; }
+.biblioteca-detalle { padding:0; }
+.biblioteca-titulo-tema { margin:12px 0 18px; font-size:1.35rem; }
+.biblioteca-teoria { display:grid; gap:11px; }
+.biblioteca-bloque-teoria { padding:16px; border:1px solid var(--borde); border-radius:17px; background:#fff; }
+.biblioteca-bloque-teoria h3 { margin:0 0 8px; color:#514087; font-size:.94rem; }
+.biblioteca-bloque-teoria p { margin:0; color:#454158; font-size:.84rem; line-height:1.7; white-space:pre-wrap; }
+.biblioteca-videos { display:flex; align-items:flex-start; gap:13px; margin-top:20px; padding:16px; border:1px solid #f0dfe2; border-radius:18px; background:#fff8f8; }
+.biblioteca-video-icono { display:grid; place-items:center; flex:0 0 42px; height:42px; border-radius:13px; background:#ffe1e5; color:#d3495a; font-size:1rem; }
+.biblioteca-videos h3 { margin:0 0 5px; font-size:.9rem; }
+.biblioteca-videos p { margin:0 0 11px; color:#77728a; font-size:.74rem; line-height:1.5; }
+.biblioteca-videos .btn { min-height:42px; padding:10px 12px; font-size:.73rem; text-decoration:none; }
+.biblioteca-detalle .nota-local { margin-top:14px; }
+.auth-botones { display:flex; flex:0 0 auto; gap:5px; }
+.auth-botones .icon-btn { width:38px; height:38px; font-size:1rem; }
+.lista-cuentas { display:grid; gap:9px; margin:12px 0 20px; }
+.cuenta-fila { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:13px; border:1px solid var(--borde); border-radius:15px; background:#fff; }
+.cuenta-fila>div { display:grid; min-width:0; gap:5px; }
+.cuenta-fila strong { overflow-wrap:anywhere; color:#39354e; font-size:.79rem; }
+.cuenta-fila small { color:#77728a; font-size:.67rem; line-height:1.45; }
+.cuenta-fila .btn { flex:0 0 auto; }
+.formulario-pmv input[type="date"] { color:#39354e; }
+@media(max-width:359px){.resumen-progreso{gap:6px}.resumen-progreso article{padding:12px 4px}.resumen-progreso strong{font-size:1.05rem}.actividad-cabecera{align-items:flex-start;flex-direction:column}}

@@ -1,6 +1,6 @@
-# TutorLoreto AI — PMV1, PMV2 y PMV3 · 
+# TutorLoreto AI — PMV1, PMV2 y PMV3 · 14 pantallas M3E Canvas
 
-**Proyecto independiente de prueba.** Están implementados en `frontend/index.html`, `styles.css`, `app.js` con navegación móvil. El proyecto incluye FastAPI, arquitectura hexagonal, repositorio MySQL y un adaptador para explicaciones, prácticas y recomendaciones mediante **Ollama local u Ollama Cloud**.
+**Proyecto independiente de prueba. No sobrescribas tu versión original.** Las 14 pantallas y estados están implementados en `frontend/index.html`, `styles.css`, `app.js` con navegación móvil. El proyecto incluye FastAPI, arquitectura hexagonal, repositorio MySQL y un adaptador para explicaciones, prácticas y recomendaciones mediante **Ollama local u Ollama Cloud**.
 
 ## Ejecutar esta copia en Windows desde `PMV1_codigo`
 

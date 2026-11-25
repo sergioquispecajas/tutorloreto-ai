@@ -19,11 +19,26 @@ class MySQLConsultaRepository:
             ).first()
             if encontrada is None:
                 raise ValueError('La asignatura indicada no existe.')
-            resultado = conexion.execute(
-                text("""INSERT INTO consultas(asignatura_id, pregunta, estado)
-                        VALUES (:asignatura_id, :pregunta, 'PENDIENTE')"""),
-                {'asignatura_id': consulta.asignatura_id, 'pregunta': consulta.pregunta},
-            )
+            if consulta.perfil_id:
+                resultado = conexion.execute(
+                    text("""INSERT INTO consultas(asignatura_id, pregunta, perfil_id, estado)
+                            VALUES (:asignatura_id, :pregunta, :perfil_id, 'PENDIENTE')"""),
+                    {
+                        'asignatura_id': consulta.asignatura_id,
+                        'pregunta': consulta.pregunta,
+                        'perfil_id': consulta.perfil_id,
+                    },
+                )
+            else:
+                # Mantiene PMV1 operativo mientras se programa la migración de PMV2/3.
+                resultado = conexion.execute(
+                    text("""INSERT INTO consultas(asignatura_id, pregunta, estado)
+                            VALUES (:asignatura_id, :pregunta, 'PENDIENTE')"""),
+                    {
+                        'asignatura_id': consulta.asignatura_id,
+                        'pregunta': consulta.pregunta,
+                    },
+                )
             return {
                 'id': int(resultado.lastrowid),
                 'asignatura_id': consulta.asignatura_id,
@@ -34,12 +49,13 @@ class MySQLConsultaRepository:
     def obtener(self, identificador: int) -> dict | None:
         with get_engine().connect() as conexion:
             fila = conexion.execute(
-                text('SELECT id, asignatura_id, pregunta, estado, creado_en FROM consultas WHERE id = :id'),
+                text('SELECT id, asignatura_id, perfil_id, pregunta, estado, creado_en FROM consultas WHERE id = :id'),
                 {'id': identificador},
             ).mappings().first()
             if fila is None:
                 return None
-            return {**dict(fila), 'creado_en': fila['creado_en'].isoformat()}
+            return {**dict(fila), 'perfil_id': str(fila['perfil_id']) if fila['perfil_id'] else None,
+                    'creado_en': fila['creado_en'].isoformat()}
 
     def obtener_respuesta(self, identificador: int) -> dict | None:
         with get_engine().connect() as conexion:

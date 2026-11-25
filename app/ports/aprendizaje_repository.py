@@ -1,0 +1,19 @@
+"""Puerto de persistencia para perfiles, prácticas y seguimiento académico."""
+
+from typing import Protocol
+
+
+class AprendizajeRepository(Protocol):
+    def guardar_perfil(self, perfil_id: str, grado: int) -> dict: ...
+
+    def obtener_perfil(self, perfil_id: str) -> dict | None: ...
+
+    def guardar_practica(self, datos: dict) -> int: ...
+
+    def responder_practica(
+        self, practica_id: int, perfil_id: str, opcion: int
+    ) -> dict | None: ...
+
+    def historial(self, perfil_id: str, limite: int = 50) -> list[dict]: ...
+
+    def progreso(self, perfil_id: str) -> dict: ...
